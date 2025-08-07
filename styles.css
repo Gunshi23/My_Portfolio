@@ -1,0 +1,513 @@
+/* Basic Reset & Body Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color:white;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color:black;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.navbar-brand {
+    color: white;
+    text-decoration: none;
+    font-size: 2.5em;
+    font-weight: bold;
+    font-family: "EB Garamond", serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-style: normal;
+}
+
+.navbar-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* For desktop view */
+    font-family: "EB Garamond", serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-style: normal;
+    font-size: 1.1rem;
+
+}
+
+.nav-item {
+    margin-left: 25px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #F1E5D1; /* Gold color on hover */
+}
+
+/* Toggler Button for Mobile */
+.navbar-toggler {
+    display: none; /* Hidden by default on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.toggler-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Navbar Collapse (Mobile Menu) */
+.navbar-collapse {
+    display: flex; /* Flex on desktop */
+}
+
+/* Content Area */
+.content {
+    padding: 20px;
+    text-align: center;
+}
+
+.hi{
+     font-family: "EB Garamond", serif;
+    font-optical-sizing: auto;
+    font-weight:600;
+    font-style: normal;
+    font-size: 1.4rem;
+    margin-left: 7%;
+    margin-top: 7%;
+    margin-bottom: 1%;
+}
+
+.name{
+     font-family: "EB Garamond", serif;
+    font-optical-sizing: auto;
+    font-weight:700;
+    font-style: normal;
+    font-size: 2.5rem;
+    margin-left: 7%;
+    margin-top: 0.1%;
+    margin-bottom: 0.5%;
+}
+.line{
+     border: 3px solid red;
+     margin-left: 50%;
+     margin-right: 40%;
+     margin-top: 0%;
+}
+.typewrite{
+    margin-left: 7%;
+    font-family: "EB Garamond", serif;
+    font-optical-sizing: auto;
+    font-weight:700;
+    font-style: normal;
+    color:white;
+    text-decoration: none;
+}
+.mypic{
+    border-style: none;
+    border-radius: 50%;
+    margin-right: 100%;
+}
+
+.hero-section{
+      display: flex;
+      justify-content: space-between;
+      font-size: 2em;
+        
+}
+.description{
+    margin-left: 7.5%;
+    font-size: 1.2em;
+}
+.contact-button{
+    background-color: white;
+    border: none;
+    color: black;
+    border-color: #ef1717;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  margin-left: 7.1%;
+  border-radius: 0%;
+}
+
+.contact-button:hover {
+  background-color: #ef1717;
+  color:white;
+}
+.circle-button {
+ 
+  font-size: 30px;
+  display: flex;
+  width: 20px;
+  justify-content: space-between;
+  text-decoration: none;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.833);
+ 
+  margin-left: 7%;
+}
+.profile-pic {
+    border-radius: 0%;
+    width: 100%;
+    height: 20%;
+}
+
+ .resume-links {
+                text-align: center;
+                margin-top: 5%;
+                color:black;
+                justify-content: center;
+                background-color: rgb(255, 0, 0);
+                font-family: "EB Garamond", serif;
+                width: 30%;
+                margin-left: 35%;
+                border-color: white;
+                border-style: solid;
+                border-radius: 30px;
+            }      
+.resume-links a {
+                color: black;
+                text-decoration: none;
+                padding: 20px 20px 20px;
+                background-color: rgb(255, 255, 255);
+        
+                font-weight: 600;
+                transition: background-color 0.3s ease;
+                font-family: "EB Garamond", serif;
+            }                                                                                    
+
+.footer {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 97%;
+} 
+
+.pdf{
+    margin-bottom: 2%;
+    margin-top: 3%;
+}
+.container1{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ef1717;
+        }
+.contact-container {
+            width: 100%;
+            max-width: 97%;
+            margin-top: 5%;
+    
+          
+            background-color: #ffffff;
+            border-color: red;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .contact-header h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            color: #555;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-item a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-item i {
+            font-size: 1.25rem;
+            color: #3498db;
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+/* Projects Section Styling */
+        #projects {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: black; /* White background for the section */
+            border-radius: 12px; /* Rounded corners for the entire section */
+            margin-top: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Soft shadow */
+        }
+
+        #projects h2 {
+            font-size: 3rem; /* Larger heading */
+            margin-bottom: 50px;
+            color: white; /* Darker blue-gray for heading */
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        #projects h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: red; /* Accent color underline */
+            border-radius: 2px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 30px; /* Space between project cards */
+            justify-content: center;
+            align-items: stretch; /* Ensure cards stretch to fill row height */
+        }
+
+        .project-card {
+            background-color: #fdfdfd;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            border: 1px solid #eee; /* Subtle border */
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px); /* Lifts the card on hover */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12); /* More pronounced shadow */
+        }
+
+        .project-image-wrapper {
+            width: 100%;
+            height: 220px; /* Fixed height for consistent image size */
+            overflow: hidden;
+            border-bottom: 1px solid #eee;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image covers the space without distortion */
+            transition: transform 0.5s ease; /* Smooth zoom on hover */
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05); /* Slightly zoom image on card hover */
+        }
+
+        .project-content {
+            padding: 25px;
+            flex-grow: 1; /* Allows content to take available space */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.8rem; /* Larger title */
+            margin-bottom: 15px;
+            color: #34495e; /* Darker text for title */
+            font-weight: 600;
+        }
+
+        .project-description {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: black; /* Lighter gray for description */
+            margin-bottom: 25px;
+            flex-grow: 1; /* Allows description to take available space */
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px; /* Space between buttons */
+            margin-top: auto; /* Pushes links to the bottom */
+            flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+        }
+
+        .project-link {
+            display: inline-flex; /* Use flex for icon alignment */
+            align-items: center;
+            justify-content: center;
+            background-color: black; /* Primary button color */
+            color:red;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px; /* More rounded buttons */
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3); /* Button shadow */
+        }
+
+        .project-link:hover {
+            background-color: rgb(255, 255, 255); /* Darker color on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .project-link.secondary {
+            background-color: black; /* Secondary button color */
+            box-shadow: 0 4px 10px rgb(255, 255, 255);
+        }
+
+        .project-link.secondary:hover {
+            background-color: white;
+            box-shadow: white;
+        }
+
+        /* Font Awesome for icons (optional, but good for project links) */
+        .project-link i {
+            margin-right: 8px;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px){
+            #projects h2 {
+                font-size: 2.5rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr; /* Stack cards vertically on small screens */
+            }
+
+            .project-card {
+                max-width: 90%; /* Adjust max-width for better mobile fit */
+                margin: 0 auto; /* Center cards */
+            }
+
+            .project-link {
+                width: 100%; /* Full width buttons on small screens */
+            } 
+            .resume-links {
+                text-align: center;
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+                background-color: black;
+
+
+            }              
+            
+           
+
+/* Responsive Design */
+@media (max-width: 600px) {
+            .contact-list {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+@media (max-width: 768px) {
+    .navbar-toggler {
+        display: block; /* Show toggler on mobile */
+    }
+
+    .navbar-collapse {
+        display: none; /* Hide collapse by default on mobile */
+        width: 100%;
+        position: absolute;
+        top: 60px; /* Adjust based on navbar height */
+        left: 0;
+        background-color: #333;
+        flex-direction: column;
+        text-align: center;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000; /* Ensure it's above other content */
+    }
+
+    .navbar-collapse.show {
+        display: flex; /* Show when toggled */
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .nav-item {
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-item:last-child {
+        border-bottom: none;
+    }
+
+    .nav-link {
+        padding: 15px;
+        display: block;
+    }
+
+    /* Toggler Animation (Hamburger to Cross) */
+    .navbar-toggler.active .toggler-icon:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .navbar-toggler.active .toggler-icon:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navbar-toggler.active .toggler-icon:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }}}
