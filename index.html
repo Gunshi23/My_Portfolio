@@ -3,258 +3,467 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PORTFOLIO</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Manrope:wght@200..800&family=Metamorphous&family=Rakkas&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Gunshika Agarwal | Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #02040a;
+            --indigo-glow: rgba(79, 70, 229, 0.15);
+            --purple-glow: rgba(147, 51, 234, 0.1);
+            --gold-glow: rgba(251, 191, 36, 0.1);
+            --emerald-glow: rgba(16, 185, 129, 0.1);
+        }
 
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- ATMOSPHERIC DEPTH LAYERS --- */
+        .depth-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .blueprint-grid {
+            position: absolute;
+            inset: 0;
+            opacity: 0.12;
+            background-image: 
+                linear-gradient(#1e293b 1px, transparent 1px), 
+                linear-gradient(90deg, #1e293b 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+        }
+
+        .nebula-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.6;
+            animation: moveOrb 25s infinite linear;
+        }
+
+        .orb-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: var(--indigo-glow); }
+        .orb-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: var(--purple-glow); animation-delay: -5s; }
+
+        @keyframes moveOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .noise-overlay {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* --- ANIMATIONS --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+
+        /* --- CARD INTERACTIONS --- */
+        .project-card, .achievement-card {
+            background: rgba(10, 17, 32, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card:hover, .achievement-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+        }
+
+        .achievement-card:hover {
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .card-glow {
+            position: absolute;
+            top: -20%; right: -20%;
+            width: 150px; height: 150px;
+            filter: blur(40px);
+            opacity: 0.2;
+            transition: all 0.6s ease;
+            z-index: 0;
+        }
+
+        .achievement-card:hover .card-glow {
+            opacity: 0.4;
+            transform: scale(1.3);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    </style>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="#" class="navbar-brand">Gunshika</a>
-        <button class="navbar-toggler" aria-label="Toggle navigation">
-            <span class="toggler-icon"></span>
-            <span class="toggler-icon"></span>
-            <span class="toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#mypic">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#aboutme">About me</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#projects">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#resume">Resume</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact-container">Contact</a>
-                </li>
-                
-                </li>
-            </ul>
+
+    <div class="depth-container">
+        <div class="blueprint-grid"></div>
+        <div class="nebula-orb orb-1"></div>
+        <div class="nebula-orb orb-2"></div>
+        <div class="noise-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 py-8 transition-all duration-500 px-8">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg">G</div>
+                <span class="text-sm font-black tracking-widest text-white uppercase hidden sm:inline">Gunshika</span>
+            </div>
+            <div class="flex items-center space-x-8 text-[11px] font-bold tracking-[0.2em] text-slate-400 overflow-x-auto no-scrollbar">
+                <a href="#home" class="hover:text-white transition-colors uppercase whitespace-nowrap">Home</a>
+                <a href="#projects" class="hover:text-white transition-colors uppercase whitespace-nowrap">Projects</a>
+                <a href="#certifications" class="hover:text-white transition-colors uppercase whitespace-nowrap">Certifications</a>
+                <a href="#experience" class="hover:text-white transition-colors uppercase whitespace-nowrap">Experience</a>
+                <a href="mailto:gunshikaagarwaldpr@gmail.com" class="px-5 py-2 rounded-full border border-indigo-500/50 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all whitespace-nowrap">Contact</a>
+            </div>
         </div>
     </nav>
-<div><img src="mypic5.PNG" alt="" height="200px" width="200px" class="profile-pic" id="mypic"></div>
-<div class="container">
-    <div class="content" id="aboutme">
-        <h2 class="hi">Hi There, I'm</h2>
-        <h1 class="name">Gunshika Agarwal</h1><hr class="line">
-        
-        <h1>
-        <a href="" class="typewrite" data-period="2000" data-type='[ "Web Developer.","Web Designer." ]'>
-        <span class="wrap"></span></a></h1>
-         <p class="description">Passionate backend developer crafting scalable systems.<br><br>
-         Loves solving real-world problems through clean, <br><br>maintainable code.
-    </p>
-    <button type="submit" class="contact-button">Contact Me</button>
-    </div>
-    <div>
-    
-    <br> 
-    <br>
-    <br>
-   
-    </div>
-    </div>
-</div>
 
-
- <div class="container1">
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2>My Projects</h2>
-            <div class="project-grid">
-
-                <!-- Project Card 1 -->
-                <div class="project-card">
-                    <div class="project-image-wrapper">
-                        <!-- Placeholder image. Replace with your actual project screenshot. -->
-                        <img src="project1.png" alt="Interactive To-Do List App" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">AI-Powered Waste Management</h3>
-                        <p class="project-description">
-                            A responsive web application built with **HTML, CSS, and JavaScript** that allows users to scan the waste product using webcam and then AI model finds the waste category and provides information on how to dispose of it properly.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://wastify-codecrafters01.vercel.app/" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="https://github.com/Gunshi23/WASTIFY_codecrafters01" class="project-link secondary" target="_blank">
-                                <i class="fa fa-github"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
+    <main class="relative z-10 px-8">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center text-center pt-20">
+            <div class="max-w-5xl">
+                <div class="fade-in-up stagger-1 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-indigo-400 text-[10px] font-black tracking-[0.3em] uppercase mb-8">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span> System Status: Operational
                 </div>
 
-                <!-- Project Card 2 -->
-                <div class="project-card">
-                    <div class="project-image-wrapper">
-                        <img src="project2.png" alt="Weather Dashboard" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">E-commerce Product Page</h3>
-                        <p class="project-description">
-                           A responsive front-end design for an e-commerce product page, showcasing product images, descriptions, pricing, and a functional "Add to Cart" button. Built with **HTML and CSS** focusing on modern UI/UX principles.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://wavrooza-7ibi-6k72y9v6h-gunshi23s-projects.vercel.app/" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="https://github.com/Gunshi23/wavrooza" class="project-link secondary" target="_blank">
-                                <i class="fa fa-github"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <h1 class="fade-in-up stagger-2 text-6xl md:text-[9rem] font-black text-white leading-[0.8] mb-12 tracking-tighter uppercase">
+                    Gunshika <br />
+                    <span class="text-transparent" style="-webkit-text-stroke: 1.5px rgba(255,255,255,0.2); background: linear-gradient(to right, #818cf8, #c084fc); -webkit-background-clip: text;">Agarwal</span>
+                </h1>
 
-                <!-- Project Card 3 -->
-                <div class="project-card">
-                    <div class="project-image-wrapper">
-                        <img src="project3.png" alt="Simple E-commerce Frontend" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">A Tribute Page</h3>
-                        <p class="project-description">
-                            A simple tribute page dedicated to Dr.APJ Abdul Kalam, showcasing their achievements and contributions. Built with **HTML and CSS**, focusing on clean design and responsive layout.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://apj-abdul-kalam-tribute-page.vercel.app/" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="https://github.com/Gunshi23/APJ-ABDUL-KALAM-TRIBUTE-PAGE" class="project-link secondary" target="_blank">
-                                <i class="fa fa-github"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <p class="fade-in-up stagger-3 text-lg md:text-2xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+                    Entry-level Full Stack Developer with hands-on experience in <span class="text-white font-medium italic underline decoration-indigo-500/50 decoration-4 underline-offset-4">web and AI-based applications</span>, paid internship experience, and hackathon-selected projects.
+                </p>
 
-                 <!-- Project Card 4 -->
-                <div class="project-card">
-                    <div class="project-image-wrapper">
-                        <img src="project4.png" alt="Simple E-commerce Frontend" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Expense Tracker</h3>
-                        <p class="project-description">
-                            A responsive front-end design for an expense tracker website, built with **HTML, CSS, and JavaScript**, focusing on user-friendly interface and functionality.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://budget-tracker-lilac-xi.vercel.app/" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="https://github.com/Gunshi23/Budget_tracker" class="project-link secondary" target="_blank">
-                                <i class="fa fa-github"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
+                <div class="fade-in-up stagger-4 mt-12 flex justify-center gap-6">
+                    <a href="https://github.com/gunshika-agarwal" target="_blank" class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-indigo-600 transition-all">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/gunshika-agarwal-091124296" target="_blank" class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-indigo-600 transition-all">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
                 </div>
-                 <!-- Project Card 5 -->
-                <div class="project-card">
-                    <div class="project-image-wrapper">
-                        <img src="project5.png" alt="Simple E-commerce Frontend" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Netflix Clone</h3>
-                        <p class="project-description">
-                            A login page for a Netflix clone, built with **HTML and CSS**. The design is inspired by Netflix's official login page.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://netflix-clone-sepia-eight-96.vercel.app/" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="https://github.com/Gunshi23/netflix-clone" class="project-link secondary" target="_blank">
-                                <i class="fa fa-github"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                 <!-- Project Card 6-->
-                <div class="project-card">
-                    <div class="project-image-wrapper">
-                        <img src="project6.png" alt="Simple E-commerce Frontend" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">E-commerce Landing Page</h3>
-                        <p class="project-description">
-                            A responsive front-end design for an e-commerce landding page of reseach website, showcasing product categories, featured products, and a clean layout. Built with **HTML and CSS** focusing on modern UI/UX principles.
-                        </p>
-                        <div class="project-links">
-                            <a href="https://gunshiikkaa-csb.vercel.app/" class="project-link" target="_blank">
-                                <i class="fa fa-live"></i> Live Demo
-                            </a>
-                            <a href="https://github.com/Gunshi23/gunshiikkaa-csb" class="project-link secondary" target="_blank">
-                                <i class="fa fa-github"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- You can add more project cards here following the same structure -->
-
             </div>
         </section>
-        <br><br>
-    </div>
-    <div class="resume-links" id="resume">
-        <h1>Download Resume</h1>
-        
-        <a href="Gunshika Agarwal.pdf" 
-           download="resume.pdf" class="pdf">
-            Download PDF
-        </a>
-    </div>
-  
 
-    <div class="contact-container" id="contact-container">
-        <div class="contact-header">
-            <h2>Contact</h2>
-        </div>
-        <ul class="contact-list">
-            <li class="contact-item">
-                <a href="mailto:your.email@example.com">
-                    <i class="fa fa-envelope"></i> gunshikaagarwal@gmail.com
-                </a>
-            </li>
-            <li class="contact-item">
-                <a href="tel:+1234567890">
-                    <i class="fa fa-phone"></i> +918979660550 
-                </a>
-            </li>
-            <li class="contact-item">
-                <a href="https://www.linkedin.com/in/gunshika-agarwal-091124296/">
-                    <i class="fa fa-linkedin"></i> Gunshika Agarwal
-                </a>
-            </li>
-            <li class="contact-item">
-                <a href="https://github.com/Gunshi23">
-                    <i class="fa fa-github"></i> Gunshi23
-                </a>
-            </li>
-            <li class="contact-item">
-                <a href="#">
-                    <i class="fa fa-map-marker"></i> Ghaziabad, Uttar Pradesh, India
-                </a>
-            </li>
-        </ul>
-    </div>
+        <!-- Projects Section -->
+        <section id="projects" class="py-32">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-end justify-between mb-20 px-4">
+                    <div>
+                        <span class="text-indigo-500 font-mono text-sm block mb-4 tracking-widest uppercase">// Selected_Works</span>
+                        <h2 class="text-5xl font-black text-white tracking-tighter uppercase">Featured_Projects</h2>
+                    </div>
+                    <p class="hidden md:block text-slate-500 max-w-[250px] text-[10px] font-bold leading-relaxed uppercase tracking-widest">
+                        Designing systems for wellness, health AI, and environmental awareness.
+                    </p>
+                </div>
 
-      <div class="footer">
-    <p>© 2025 Gunshika Agarwal. All rights reserved.</p>
-    <p>Designed by <b> Gunshika Agarwal </b></p>
-    </div> 
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- ManAshray -->
+                    <div class="project-card rounded-[2rem] p-10 relative overflow-hidden flex flex-col h-full group">
+                        <div class="card-glow bg-blue-500"></div>
+                        <div class="mb-10 p-4 rounded-2xl bg-white/5 border border-white/5 w-fit group-hover:bg-indigo-600/20 transition-all">
+                            <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-2 tracking-tight">ManAshray</h3>
+                        <span class="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-6 block">Full Stack Wellness App</span>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">Mental health architecture featuring self-assessments and peer support forums. Selected for Internal SIH for innovation and social impact.</p>
+                        <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5">
+                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">React</span>
+                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">Node.js</span>
+                        </div>
+                    </div>
 
-    <script src="script.js"></script>
+                    <!-- DermaSolve -->
+                    <div class="project-card rounded-[2rem] p-10 relative overflow-hidden flex flex-col h-full group">
+                        <div class="card-glow bg-purple-500"></div>
+                        <div class="mb-10 p-4 rounded-2xl bg-white/5 border border-white/5 w-fit group-hover:bg-purple-600/20 transition-all">
+                            <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-2 tracking-tight">DermaSolve AI</h3>
+                        <span class="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-6 block">Medical Computer Vision</span>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">AI-powered web app for skin disease detection. Selected in Top 20 in HCL Guvi Hackathon as a solo team.</p>
+                        <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5">
+                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">Python</span>
+                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">Image Classification</span>
+                        </div>
+                    </div>
 
+                    <!-- Wastify -->
+                    <div class="project-card rounded-[2rem] p-10 relative overflow-hidden flex flex-col h-full group">
+                        <div class="card-glow bg-emerald-500"></div>
+                        <div class="mb-10 p-4 rounded-2xl bg-white/5 border border-white/5 w-fit group-hover:bg-emerald-600/20 transition-all">
+                            <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2 2 2 0 012 2v.657M16.47 3.291A1 1 0 0015 4.125v1.875a1 1 0 01-1 1H13a1 1 0 00-1 1V10a1 1 0 01-1 1h-3a1 1 0 00-1 1v3a1 1 0 01-1 1H7a1 1 0 00-1 1v1a1 1 0 01-1 1H4a1 1 0 00-1 1v2a1 1 0 001 1h12a1 1 0 001-1V21a1 1 0 00-1-1h-1a1 1 0 01-1-1v-1a1 1 0 00-1-1 1 1 0 01-1-1V7a1 1 0 00-1-1h-1a1 1 0 01-1-1V4.125a1 1 0 00-1.53-.834z"/></svg>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-2 tracking-tight">Wastify</h3>
+                        <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-6 block">Eco-Tech Platform</span>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">Educational platform promoting environmental sustainability through responsible waste segregation logic.</p>
+                        <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5">
+                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">HTML5/CSS3</span>
+                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">Sustainability</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Achievements Section -->
+        <section id="achievements" class="py-32">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="mb-16">
+                    <span class="text-amber-500 font-mono text-sm block mb-4 tracking-widest uppercase">// Recognition</span>
+                    <h2 class="text-5xl font-black text-white tracking-tighter uppercase">Key_Achievements</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="card-glow bg-amber-500"></div>
+                        <div class="text-amber-500 mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight relative z-10">SIH Impact Prize</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light relative z-10">Selected in Internal Smart India Hackathon for developing impactful tech for student wellness.</p>
+                    </div>
+
+                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="card-glow bg-indigo-500"></div>
+                        <div class="text-indigo-500 mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight relative z-10">Internship Excellence</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light relative z-10">Completed a paid Full Stack Internship with a 100% excellence rating in diligence and quality.</p>
+                    </div>
+
+                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="card-glow bg-emerald-500"></div>
+                        <div class="text-emerald-500 mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z"/></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight relative z-10">HCL Guvi Top 20</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light relative z-10">Outperformed teams to rank in the Top 20 solo competitors at the HCL Guvi AI Hackathon.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-32">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="mb-16">
+                    <span class="text-indigo-500 font-mono text-sm block mb-4 tracking-widest uppercase">// Validated_Expertise</span>
+                    <h2 class="text-5xl font-black text-white tracking-tighter uppercase">Certifications</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Google AI Studio -->
+                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
+                        <div class="card-glow bg-blue-600"></div>
+                        <div class="text-blue-400 mb-6 relative z-10">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0012 18.75c-1.03 0-1.9-.4-2.593-1.002l-.548-.547z" /></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Google AI Studio App Deployment</h4>
+                        <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-4 relative z-10">HCL GUVI | Google for Education Partner</p>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Successfully mastered building and deploying advanced applications using Google AI Studio infrastructures.</p>
+                        <span class="text-[10px] text-slate-600 font-bold mt-4 relative z-10 uppercase">Issued: Jan 2026</span>
+                    </div>
+
+                    <!-- Full Stack Excellence -->
+                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
+                        <div class="card-glow bg-emerald-600"></div>
+                        <div class="text-emerald-400 mb-6 relative z-10">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Full Stack Web Development (Excellence)</h4>
+                        <p class="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-4 relative z-10">LearnNex | Powered by Wipro DICE ID</p>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Recognized for 'Hardworking, Dedicated and Diligent' performance during a 60-hour intensive industry bootcamp.</p>
+                        <span class="text-[10px] text-slate-600 font-bold mt-4 relative z-10 uppercase">Issued: Dec 2025</span>
+                    </div>
+
+                    <!-- Cisco Packet Tracer -->
+                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
+                        <div class="card-glow bg-indigo-600"></div>
+                        <div class="text-indigo-400 mb-6 relative z-10">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" /></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Networking Foundations</h4>
+                        <p class="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-4 relative z-10">Cisco Networking Academy</p>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Specialized training in network simulation and infrastructure configuration using Cisco Packet Tracer.</p>
+                        <span class="text-[10px] text-slate-600 font-bold mt-4 relative z-10 uppercase">Issued: Jan 2026</span>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
+                        <div class="card-glow bg-amber-600"></div>
+                        <div class="text-amber-500 mb-6 relative z-10">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Soft Skills & Personality</h4>
+                        <p class="text-[10px] font-black text-amber-400 uppercase tracking-widest mb-4 relative z-10">NPTEL | IIT Kanpur</p>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Advanced certification focusing on leadership, communication, and industry-standard professionalism.</p>
+                    </div>
+
+                    <!-- Basics of Python -->
+                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
+                        <div class="card-glow bg-blue-500"></div>
+                        <div class="text-blue-500 mb-6 relative z-10">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" /></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Basics of Python</h4>
+                        <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-4 relative z-10">Infosys Springboard</p>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">In-depth training in Python programming, covering algorithmic thinking and data structures.</p>
+                    </div>
+
+                    <!-- Design Thinking -->
+                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
+                        <div class="card-glow bg-purple-500"></div>
+                        <div class="text-purple-400 mb-6 relative z-10">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" /></svg>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Design Thinking</h4>
+                        <p class="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-4 relative z-10">Infosys Springboard</p>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Applying empathy-based design frameworks to create user-centric digital architectures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience & Education -->
+        <section id="experience" class="py-32 bg-white/[0.01] rounded-[4rem]">
+            <div class="max-w-5xl mx-auto px-8 grid md:grid-cols-2 gap-24">
+                <!-- Internship -->
+                <div>
+                    <h2 class="text-5xl font-black text-white mb-16 tracking-tighter uppercase italic">Internship_History</h2>
+                    <div class="relative pl-12 border-l border-white/10">
+                        <div class="absolute left-[-5px] top-0 w-[10px] h-[10px] bg-indigo-500 shadow-[0_0_15px_rgba(99,102,241,1)]"></div>
+                        <div class="mb-4">
+                            <span class="text-[10px] font-black text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full uppercase tracking-widest">10/2025 — 12/2025</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-1 italic">Full Stack Developer Intern</h4>
+                        <p class="text-indigo-400 text-sm font-black uppercase tracking-widest mb-6">Learn Nex (Remote)</p>
+                        <ul class="text-sm text-slate-400 space-y-4 font-light">
+                            <li class="flex gap-3 items-start"><span class="text-indigo-500 mt-1">▹</span> Engineering responsive web applications using modern HTML5, CSS3, and JavaScript paradigms.</li>
+                            <li class="flex gap-3 items-start"><span class="text-indigo-500 mt-1">▹</span> Recognized for hardworking dedication and diligent delivery of project-based solutions.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div>
+                    <h2 class="text-5xl font-black text-white mb-16 tracking-tighter uppercase italic">Academic_Track</h2>
+                    <div class="space-y-12">
+                        <!-- B.Tech -->
+                        <div class="relative pl-12 border-l border-white/10">
+                            <div class="absolute left-[-5px] top-0 w-[10px] h-[10px] bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
+                            <span class="text-[10px] font-black text-purple-400 bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full uppercase tracking-tighter">01/2023 — 01/2027</span>
+                            <h4 class="text-2xl font-bold text-white mt-4 italic">B.Tech in Computer Science</h4>
+                            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">ABES Engineering College</p>
+                        </div>
+                        <!-- Intermediate -->
+                        <div class="relative pl-12 border-l border-white/10">
+                            <div class="absolute left-[-5px] top-0 w-[10px] h-[10px] bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.5)]"></div>
+                            <span class="text-[10px] font-black text-teal-400 bg-teal-500/10 border border-teal-500/20 px-3 py-1 rounded-full uppercase tracking-tighter">01/2022 — 01/2023</span>
+                            <h4 class="text-2xl font-bold text-white mt-4 italic tracking-tight">Intermediate (Science)</h4>
+                            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">ST.MARY'S CONVENT SE.SEC.SCHOOL</p>
+                        </div>
+                        <!-- High School -->
+                        <div class="relative pl-12 border-l border-white/10">
+                            <div class="absolute left-[-5px] top-0 w-[10px] h-[10px] bg-slate-500"></div>
+                            <span class="text-[10px] font-black text-slate-400 bg-white/5 border border-white/10 px-3 py-1 rounded-full uppercase tracking-tighter">01/2020 — 01/2021</span>
+                            <h4 class="text-2xl font-bold text-white mt-4 italic tracking-tight">High School</h4>
+                            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">ST.MARY'S CONVENT SE.SEC.SCHOOL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-40 text-center relative">
+            <h2 class="text-7xl md:text-9xl font-black text-white mb-12 tracking-tighter italic uppercase">Initiate <br/>The_Signal.</h2>
+            <a href="mailto:gunshikaagarwaldpr@gmail.com" class="inline-flex items-center gap-4 px-12 py-6 rounded-full bg-indigo-600 text-white font-black text-sm tracking-[0.3em] transition-all hover:bg-white hover:text-black shadow-2xl shadow-indigo-500/30 uppercase">Enquire_Now <span>→</span></a>
+            
+            <div class="mt-40 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-20 max-w-7xl mx-auto text-left">
+                <div>
+                    <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-4">Location</span>
+                    <p class="text-sm text-slate-400">Delhi, India</p>
+                </div>
+                <div>
+                    <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-4">Channel</span>
+                    <p class="text-sm text-slate-400 break-all">gunshikaagarwaldpr@gmail.com</p>
+                </div>
+                <div>
+                    <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-4">Network</span>
+                    <div class="flex gap-4">
+                        <a href="https://linkedin.com/in/gunshika-agarwal-091124296" target="_blank" class="text-slate-400 hover:text-white">LinkedIn</a>
+                        <a href="https://github.com/gunshika-agarwal" target="_blank" class="text-slate-400 hover:text-white">GitHub</a>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-4">© 2026</span>
+                    <p class="text-sm text-slate-400 font-bold tracking-tighter uppercase leading-none">GA_V3.ENGINE</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-[#02040a]/80', 'backdrop-blur-xl', 'py-4', 'border-b', 'border-white/5');
+                navbar.classList.remove('py-8');
+            } else {
+                navbar.classList.remove('bg-[#02040a]/80', 'backdrop-blur-xl', 'py-4', 'border-b', 'border-white/5');
+                navbar.classList.add('py-8');
+            }
+        });
+
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section > div, .project-card, .achievement-card').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
-
