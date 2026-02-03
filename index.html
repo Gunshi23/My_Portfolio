@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,6 @@
             background-color: var(--bg-dark);
             color: #e2e8f0;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
         /* --- ATMOSPHERIC DEPTH LAYERS --- */
@@ -46,18 +45,22 @@
         .nebula-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.6;
+            filter: blur(80px);
+            opacity: 0.5;
             animation: moveOrb 25s infinite linear;
         }
 
-        .orb-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: var(--indigo-glow); }
-        .orb-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: var(--purple-glow); animation-delay: -5s; }
+        @media (min-width: 768px) {
+            .nebula-orb { filter: blur(120px); opacity: 0.6; }
+        }
+
+        .orb-1 { top: -5%; left: -10%; width: 70vw; height: 70vw; background: var(--indigo-glow); }
+        .orb-2 { bottom: -5%; right: -10%; width: 60vw; height: 60vw; background: var(--purple-glow); animation-delay: -5s; }
 
         @keyframes moveOrb {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
+            33% { transform: translate(20px, -30px) scale(1.05); }
+            66% { transform: translate(-15px, 15px) scale(0.95); }
         }
 
         .noise-overlay {
@@ -71,7 +74,7 @@
         /* --- ANIMATIONS --- */
         .fade-in-up {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
             animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
@@ -86,7 +89,7 @@
 
         /* --- CARD INTERACTIONS --- */
         .project-card, .achievement-card {
-            background: rgba(10, 17, 32, 0.8);
+            background: rgba(10, 17, 32, 0.6);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -94,39 +97,41 @@
             z-index: 1;
         }
 
-        .project-card:hover, .achievement-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
-        }
-
-        .achievement-card:hover {
-            border-color: rgba(251, 191, 36, 0.3);
+        @media (hover: hover) {
+            .project-card:hover, .achievement-card:hover {
+                transform: translateY(-8px);
+                border-color: rgba(99, 102, 241, 0.3);
+                background: rgba(15, 23, 42, 0.8);
+                box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+            }
         }
 
         .card-glow {
             position: absolute;
             top: -20%; right: -20%;
-            width: 150px; height: 150px;
-            filter: blur(40px);
-            opacity: 0.2;
+            width: 120px; height: 120px;
+            filter: blur(30px);
+            opacity: 0.15;
             transition: all 0.6s ease;
             z-index: 0;
+            pointer-events: none;
         }
 
         .achievement-card:hover .card-glow {
-            opacity: 0.4;
-            transform: scale(1.3);
+            opacity: 0.35;
+            transform: scale(1.4);
         }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body>
+<body class="antialiased">
 
     <div class="depth-container">
         <div class="blueprint-grid"></div>
@@ -136,44 +141,45 @@
     </div>
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 w-full z-50 py-8 transition-all duration-500 px-8">
+    <nav id="navbar" class="fixed top-0 w-full z-50 py-6 md:py-8 transition-all duration-500 px-4 md:px-8">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg">G</div>
-                <span class="text-sm font-black tracking-widest text-white uppercase hidden sm:inline">Gunshika</span>
+                <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">G</div>
+                <span class="text-xs md:text-sm font-black tracking-widest text-white uppercase">Gunshika</span>
             </div>
-            <div class="flex items-center space-x-8 text-[11px] font-bold tracking-[0.2em] text-slate-400 overflow-x-auto no-scrollbar">
+            
+            <div class="flex items-center space-x-4 md:space-x-8 text-[10px] md:text-[11px] font-bold tracking-[0.15em] md:tracking-[0.2em] text-slate-400 overflow-x-auto no-scrollbar max-w-[60%] sm:max-w-none">
                 <a href="#home" class="hover:text-white transition-colors uppercase whitespace-nowrap">Home</a>
                 <a href="#projects" class="hover:text-white transition-colors uppercase whitespace-nowrap">Projects</a>
-                <a href="#certifications" class="hover:text-white transition-colors uppercase whitespace-nowrap">Certifications</a>
-                <a href="#experience" class="hover:text-white transition-colors uppercase whitespace-nowrap">Experience</a>
-                <a href="mailto:gunshikaagarwaldpr@gmail.com" class="px-5 py-2 rounded-full border border-indigo-500/50 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all whitespace-nowrap">Contact</a>
+                <a href="#certifications" class="hover:text-white transition-colors uppercase whitespace-nowrap">Certs</a>
+                <a href="#experience" class="hover:text-white transition-colors uppercase whitespace-nowrap">Exp</a>
+                <a href="mailto:gunshikaagarwaldpr@gmail.com" class="hidden sm:inline-block px-4 md:px-5 py-2 rounded-full border border-indigo-500/50 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all whitespace-nowrap">Contact</a>
             </div>
         </div>
     </nav>
 
-    <main class="relative z-10 px-8">
+    <main class="relative z-10 px-4 sm:px-8">
         <!-- Hero Section -->
-        <section id="home" class="min-h-screen flex items-center justify-center text-center pt-20">
-            <div class="max-w-5xl">
-                <div class="fade-in-up stagger-1 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-indigo-400 text-[10px] font-black tracking-[0.3em] uppercase mb-8">
+        <section id="home" class="min-h-[90vh] md:min-h-screen flex items-center justify-center text-center pt-24 pb-12">
+            <div class="max-w-5xl w-full">
+                <div class="fade-in-up stagger-1 inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-white/5 border border-white/10 text-indigo-400 text-[9px] md:text-[10px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase mb-6 md:mb-8">
                     <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span> System Status: Operational
                 </div>
 
-                <h1 class="fade-in-up stagger-2 text-6xl md:text-[9rem] font-black text-white leading-[0.8] mb-12 tracking-tighter uppercase">
-                    Gunshika <br />
-                    <span class="text-transparent" style="-webkit-text-stroke: 1.5px rgba(255,255,255,0.2); background: linear-gradient(to right, #818cf8, #c084fc); -webkit-background-clip: text;">Agarwal</span>
+                <h1 class="fade-in-up stagger-2 text-5xl sm:text-7xl md:text-8xl lg:text-[9.5rem] font-black text-white leading-[0.9] mb-8 md:mb-12 tracking-tighter uppercase break-words">
+                    Gunshika <br class="hidden sm:block" />
+                    <span class="text-transparent px-1" style="-webkit-text-stroke: 1px rgba(255,255,255,0.2); background: linear-gradient(to right, #818cf8, #c084fc); -webkit-background-clip: text;">Agarwal</span>
                 </h1>
 
-                <p class="fade-in-up stagger-3 text-lg md:text-2xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
-                    Entry-level Full Stack Developer with hands-on experience in <span class="text-white font-medium italic underline decoration-indigo-500/50 decoration-4 underline-offset-4">web and AI-based applications</span>, paid internship experience, and hackathon-selected projects.
+                <p class="fade-in-up stagger-3 text-base sm:text-xl md:text-2xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed px-2">
+                    Entry-level Full Stack Developer with hands-on experience in <span class="text-white font-medium italic underline decoration-indigo-500/50 decoration-2 md:decoration-4 underline-offset-4">web and AI-based applications</span>.
                 </p>
 
-                <div class="fade-in-up stagger-4 mt-12 flex justify-center gap-6">
-                    <a href="https://github.com/gunshika-agarwal" target="_blank" class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-indigo-600 transition-all">
+                <div class="fade-in-up stagger-4 mt-10 md:mt-12 flex justify-center gap-4 md:gap-6">
+                    <a href="https://github.com/gunshika-agarwal" target="_blank" aria-label="GitHub" class="p-3.5 md:p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-indigo-600 transition-all">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                     </a>
-                    <a href="https://linkedin.com/in/gunshika-agarwal-091124296" target="_blank" class="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-indigo-600 transition-all">
+                    <a href="https://linkedin.com/in/gunshika-agarwal-091124296" target="_blank" aria-label="LinkedIn" class="p-3.5 md:p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-indigo-600 transition-all">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     </a>
                 </div>
@@ -181,61 +187,60 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-32">
+        <section id="projects" class="py-20 md:py-32">
             <div class="max-w-7xl mx-auto">
-                <div class="flex items-end justify-between mb-20 px-4">
-                    <div>
-                        <span class="text-indigo-500 font-mono text-sm block mb-4 tracking-widest uppercase">// Selected_Works</span>
-                        <h2 class="text-5xl font-black text-white tracking-tighter uppercase">Featured_Projects</h2>
+                <div class="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 md:mb-20 px-2 md:px-4">
+                    <div class="mb-6 md:mb-0">
+                        <span class="text-indigo-500 font-mono text-xs md:text-sm block mb-3 md:mb-4 tracking-widest uppercase">// Selected_Works</span>
+                        <h2 class="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase">Featured_Projects</h2>
                     </div>
-                    <p class="hidden md:block text-slate-500 max-w-[250px] text-[10px] font-bold leading-relaxed uppercase tracking-widest">
+                    <p class="text-slate-500 max-w-[280px] text-[9px] md:text-[10px] font-bold leading-relaxed uppercase tracking-widest">
                         Designing systems for wellness, health AI, and environmental awareness.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     <!-- ManAshray -->
-                    <div class="project-card rounded-[2rem] p-10 relative overflow-hidden flex flex-col h-full group">
+                    <div class="project-card rounded-[2rem] p-8 md:p-10 relative overflow-hidden flex flex-col h-full group">
                         <div class="card-glow bg-blue-500"></div>
-                        <div class="mb-10 p-4 rounded-2xl bg-white/5 border border-white/5 w-fit group-hover:bg-indigo-600/20 transition-all">
+                        <div class="mb-8 md:mb-10 p-3.5 md:p-4 rounded-2xl bg-white/5 border border-white/5 w-fit group-hover:bg-indigo-600/20 transition-all">
                             <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                         </div>
-                        <h3 class="text-3xl font-bold text-white mb-2 tracking-tight">ManAshray</h3>
-                        <span class="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-6 block">Full Stack Wellness App</span>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">Mental health architecture featuring self-assessments and peer support forums. Selected for Internal SIH for innovation and social impact.</p>
-                        <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5">
-                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">React</span>
-                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">Node.js</span>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">ManAshray</h3>
+                        <span class="text-[9px] md:text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-4 md:mb-6 block">Full Stack Wellness App</span>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 md:mb-8 flex-grow">Mental health architecture featuring self-assessments and peer support forums. Selected for Internal SIH for innovation and social impact.</p>
+                        <div class="flex flex-wrap gap-2 pt-5 md:pt-6 border-t border-white/5">
+                            <span class="text-[8px] md:text-[9px] uppercase tracking-widest font-black px-2.5 md:px-3 py-1 md:py-1.5 rounded-full bg-white/5 text-slate-500">React</span>
+                            <span class="text-[8px] md:text-[9px] uppercase tracking-widest font-black px-2.5 md:px-3 py-1 md:py-1.5 rounded-full bg-white/5 text-slate-500">Node.js</span>
                         </div>
                     </div>
 
                     <!-- DermaSolve -->
-                    <div class="project-card rounded-[2rem] p-10 relative overflow-hidden flex flex-col h-full group">
+                    <div class="project-card rounded-[2rem] p-8 md:p-10 relative overflow-hidden flex flex-col h-full group">
                         <div class="card-glow bg-purple-500"></div>
-                        <div class="mb-10 p-4 rounded-2xl bg-white/5 border border-white/5 w-fit group-hover:bg-purple-600/20 transition-all">
+                        <div class="mb-8 md:mb-10 p-3.5 md:p-4 rounded-2xl bg-white/5 border border-white/5 w-fit group-hover:bg-purple-600/20 transition-all">
                             <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         </div>
-                        <h3 class="text-3xl font-bold text-white mb-2 tracking-tight">DermaSolve AI</h3>
-                        <span class="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-6 block">Medical Computer Vision</span>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">AI-powered web app for skin disease detection. Selected in Top 20 in HCL Guvi Hackathon as a solo team.</p>
-                        <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5">
-                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">Python</span>
-                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">Image Classification</span>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">DermaSolve AI</h3>
+                        <span class="text-[9px] md:text-[10px] font-black text-purple-400 uppercase tracking-widest mb-4 md:mb-6 block">Medical Computer Vision</span>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 md:mb-8 flex-grow">AI-powered web app for skin disease detection. Selected in Top 20 in HCL Guvi Hackathon as a solo team.</p>
+                        <div class="flex flex-wrap gap-2 pt-5 md:pt-6 border-t border-white/5">
+                            <span class="text-[8px] md:text-[9px] uppercase tracking-widest font-black px-2.5 md:px-3 py-1 md:py-1.5 rounded-full bg-white/5 text-slate-500">Python</span>
+                            <span class="text-[8px] md:text-[9px] uppercase tracking-widest font-black px-2.5 md:px-3 py-1 md:py-1.5 rounded-full bg-white/5 text-slate-500">ML</span>
                         </div>
                     </div>
 
                     <!-- Wastify -->
-                    <div class="project-card rounded-[2rem] p-10 relative overflow-hidden flex flex-col h-full group">
+                    <div class="project-card rounded-[2rem] p-8 md:p-10 relative overflow-hidden flex flex-col h-full group">
                         <div class="card-glow bg-emerald-500"></div>
-                        <div class="mb-10 p-4 rounded-2xl bg-white/5 border border-white/5 w-fit group-hover:bg-emerald-600/20 transition-all">
+                        <div class="mb-8 md:mb-10 p-3.5 md:p-4 rounded-2xl bg-white/5 border border-white/5 w-fit group-hover:bg-emerald-600/20 transition-all">
                             <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2 2 2 0 012 2v.657M16.47 3.291A1 1 0 0015 4.125v1.875a1 1 0 01-1 1H13a1 1 0 00-1 1V10a1 1 0 01-1 1h-3a1 1 0 00-1 1v3a1 1 0 01-1 1H7a1 1 0 00-1 1v1a1 1 0 01-1 1H4a1 1 0 00-1 1v2a1 1 0 001 1h12a1 1 0 001-1V21a1 1 0 00-1-1h-1a1 1 0 01-1-1v-1a1 1 0 00-1-1 1 1 0 01-1-1V7a1 1 0 00-1-1h-1a1 1 0 01-1-1V4.125a1 1 0 00-1.53-.834z"/></svg>
                         </div>
-                        <h3 class="text-3xl font-bold text-white mb-2 tracking-tight">Wastify</h3>
-                        <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-6 block">Eco-Tech Platform</span>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">Educational platform promoting environmental sustainability through responsible waste segregation logic.</p>
-                        <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5">
-                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">HTML5/CSS3</span>
-                            <span class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 rounded-full bg-white/5 text-slate-500">Sustainability</span>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 tracking-tight">Wastify</h3>
+                        <span class="text-[9px] md:text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-4 md:mb-6 block">Eco-Tech Platform</span>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 md:mb-8 flex-grow">Educational platform promoting environmental sustainability through responsible waste segregation logic.</p>
+                        <div class="flex flex-wrap gap-2 pt-5 md:pt-6 border-t border-white/5">
+                            <span class="text-[8px] md:text-[9px] uppercase tracking-widest font-black px-2.5 md:px-3 py-1 md:py-1.5 rounded-full bg-white/5 text-slate-500">HTML/CSS</span>
                         </div>
                     </div>
                 </div>
@@ -243,38 +248,38 @@
         </section>
 
         <!-- Achievements Section -->
-        <section id="achievements" class="py-32">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="mb-16">
-                    <span class="text-amber-500 font-mono text-sm block mb-4 tracking-widest uppercase">// Recognition</span>
-                    <h2 class="text-5xl font-black text-white tracking-tighter uppercase">Key_Achievements</h2>
+        <section id="achievements" class="py-20 md:py-32">
+            <div class="max-w-7xl mx-auto px-2 md:px-4">
+                <div class="mb-12 md:mb-16">
+                    <span class="text-amber-500 font-mono text-xs md:text-sm block mb-3 md:mb-4 tracking-widest uppercase">// Recognition</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase">Key_Achievements</h2>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+                    <div class="achievement-card p-6 md:p-8 rounded-3xl relative overflow-hidden group">
                         <div class="card-glow bg-amber-500"></div>
-                        <div class="text-amber-500 mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
+                        <div class="text-amber-500 mb-5 md:mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
                         </div>
-                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight relative z-10">SIH Impact Prize</h4>
+                        <h4 class="text-lg md:text-xl font-bold text-white mb-2 md:mb-3 tracking-tight relative z-10">SIH Impact Prize</h4>
                         <p class="text-sm text-slate-400 leading-relaxed font-light relative z-10">Selected in Internal Smart India Hackathon for developing impactful tech for student wellness.</p>
                     </div>
 
-                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="achievement-card p-6 md:p-8 rounded-3xl relative overflow-hidden group">
                         <div class="card-glow bg-indigo-500"></div>
-                        <div class="text-indigo-500 mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
+                        <div class="text-indigo-500 mb-5 md:mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                         </div>
-                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight relative z-10">Internship Excellence</h4>
+                        <h4 class="text-lg md:text-xl font-bold text-white mb-2 md:mb-3 tracking-tight relative z-10">Internship Excellence</h4>
                         <p class="text-sm text-slate-400 leading-relaxed font-light relative z-10">Completed a paid Full Stack Internship with a 100% excellence rating in diligence and quality.</p>
                     </div>
 
-                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="achievement-card p-6 md:p-8 rounded-3xl relative overflow-hidden group">
                         <div class="card-glow bg-emerald-500"></div>
-                        <div class="text-emerald-500 mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
+                        <div class="text-emerald-500 mb-5 md:mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z"/></svg>
                         </div>
-                        <h4 class="text-xl font-bold text-white mb-3 tracking-tight relative z-10">HCL Guvi Top 20</h4>
+                        <h4 class="text-lg md:text-xl font-bold text-white mb-2 md:mb-3 tracking-tight relative z-10">HCL Guvi Top 20</h4>
                         <p class="text-sm text-slate-400 leading-relaxed font-light relative z-10">Outperformed teams to rank in the Top 20 solo competitors at the HCL Guvi AI Hackathon.</p>
                     </div>
                 </div>
@@ -282,130 +287,102 @@
         </section>
 
         <!-- Certifications Section -->
-        <section id="certifications" class="py-32">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="mb-16">
-                    <span class="text-indigo-500 font-mono text-sm block mb-4 tracking-widest uppercase">// Validated_Expertise</span>
-                    <h2 class="text-5xl font-black text-white tracking-tighter uppercase">Certifications</h2>
+        <section id="certifications" class="py-20 md:py-32">
+            <div class="max-w-7xl mx-auto px-2 md:px-4">
+                <div class="mb-12 md:mb-16">
+                    <span class="text-indigo-500 font-mono text-xs md:text-sm block mb-3 md:mb-4 tracking-widest uppercase">// Validated_Expertise</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-white tracking-tighter uppercase">Certifications</h2>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-6">
-                    <!-- Google AI Studio -->
-                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
-                        <div class="card-glow bg-blue-600"></div>
-                        <div class="text-blue-400 mb-6 relative z-10">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0012 18.75c-1.03 0-1.9-.4-2.593-1.002l-.548-.547z" /></svg>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+                    <!-- Python Essentials 1 (NEW) -->
+                    <div class="achievement-card p-6 md:p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
+                        <div class="card-glow bg-yellow-500"></div>
+                        <div class="text-blue-400 mb-5 md:mb-6 relative z-10 flex items-center gap-2">
+                            <svg class="w-7 h-7 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.25.46-.36.38-.45.31-.54.22-.61.12-.67.04H8.45l-.31.02-.23.05-.19.09-.13.11-.07.13-.02.14v3.22l.01.27.02.18.06.15.08.12.1.07.18.04.21.02h5.02l.62.05.54.14.46.26.37.35.26.47.15.55.05.63V19.33l-.01.3-.04.27-.1.32-.15.33-.25.34-.34.33-.44.33-.58.31-.72.25-.87.21-.94.09h-4l-.94-.09-.87-.21-.72-.25-.59-.31-.44-.33-.33-.33-.25-.34-.15-.33-.1-.32-.04-.27-.01-.3v-3.23l.05-.63.13-.55.25-.46.36-.38.45-.31.54-.22.61-.12.67-.04h6.05l.31-.02.23-.05.19-.09.13-.11.07-.13.02-.14v-3.22l-.01-.27-.02-.18-.06-.15-.08-.12-.1-.07-.18-.04-.21-.02H7.47l-.62-.05-.54-.14-.46-.26-.37-.35-.26-.47-.15-.55-.05-.63V4.67l.01-.3.04-.27.1-.32.15-.33.25-.34.34-.33.44-.33.58-.31.72-.25.87-.21.94-.09h4.03l.94.09zM8.5 2.1c-.28 0-.5.22-.5.5s.22.5.5.5.5-.22.5-.5-.22-.5-.5-.5zm7 19.33c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5z"/></svg>
                         </div>
-                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Google AI Studio App Deployment</h4>
-                        <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-4 relative z-10">HCL GUVI | Google for Education Partner</p>
-                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Successfully mastered building and deploying advanced applications using Google AI Studio infrastructures.</p>
-                        <span class="text-[10px] text-slate-600 font-bold mt-4 relative z-10 uppercase">Issued: Jan 2026</span>
+                        <h4 class="text-lg md:text-xl font-bold text-white mb-2 tracking-tight relative z-10 leading-snug">Python Essentials 1</h4>
+                        <p class="text-[9px] font-black text-blue-400 uppercase tracking-widest mb-3 md:mb-4 relative z-10">Cisco Academy | OpenEDG</p>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Algorithmic thinking and Python 3 programming involving design, debugging, and refactoring scripts.</p>
+                        <span class="text-[9px] text-slate-600 font-bold mt-4 relative z-10 uppercase">Issued: Feb 2026</span>
+                    </div>
+
+                    <!-- Google AI Studio -->
+                    <div class="achievement-card p-6 md:p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
+                        <div class="card-glow bg-blue-600"></div>
+                        <div class="text-blue-400 mb-5 md:mb-6 relative z-10">
+                            <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0012 18.75c-1.03 0-1.9-.4-2.593-1.002l-.548-.547z" /></svg>
+                        </div>
+                        <h4 class="text-lg md:text-xl font-bold text-white mb-2 tracking-tight relative z-10 leading-snug">Google AI Studio App Deployment</h4>
+                        <p class="text-[9px] font-black text-blue-400 uppercase tracking-widest mb-3 md:mb-4 relative z-10">HCL GUVI | Google Partner</p>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Building and deploying advanced applications using Google AI Studio.</p>
+                        <span class="text-[9px] text-slate-600 font-bold mt-4 relative z-10 uppercase">Issued: Jan 2026</span>
                     </div>
 
                     <!-- Full Stack Excellence -->
-                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
+                    <div class="achievement-card p-6 md:p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
                         <div class="card-glow bg-emerald-600"></div>
-                        <div class="text-emerald-400 mb-6 relative z-10">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        <div class="text-emerald-400 mb-5 md:mb-6 relative z-10">
+                            <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
                         </div>
-                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Full Stack Web Development (Excellence)</h4>
-                        <p class="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-4 relative z-10">LearnNex | Powered by Wipro DICE ID</p>
-                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Recognized for 'Hardworking, Dedicated and Diligent' performance during a 60-hour intensive industry bootcamp.</p>
-                        <span class="text-[10px] text-slate-600 font-bold mt-4 relative z-10 uppercase">Issued: Dec 2025</span>
-                    </div>
-
-                    <!-- Cisco Packet Tracer -->
-                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
-                        <div class="card-glow bg-indigo-600"></div>
-                        <div class="text-indigo-400 mb-6 relative z-10">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" /></svg>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Networking Foundations</h4>
-                        <p class="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-4 relative z-10">Cisco Networking Academy</p>
-                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Specialized training in network simulation and infrastructure configuration using Cisco Packet Tracer.</p>
-                        <span class="text-[10px] text-slate-600 font-bold mt-4 relative z-10 uppercase">Issued: Jan 2026</span>
+                        <h4 class="text-lg md:text-xl font-bold text-white mb-2 tracking-tight relative z-10 leading-snug">Full Stack Web (Excellence)</h4>
+                        <p class="text-[9px] font-black text-emerald-400 uppercase tracking-widest mb-3 md:mb-4 relative z-10">LearnNex | Wipro DICE ID</p>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Recognized for 'Hardworking and Diligent' performance during industry bootcamp.</p>
+                        <span class="text-[9px] text-slate-600 font-bold mt-4 relative z-10 uppercase">Issued: Dec 2025</span>
                     </div>
 
                     <!-- Soft Skills -->
-                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
+                    <div class="achievement-card p-6 md:p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
                         <div class="card-glow bg-amber-600"></div>
-                        <div class="text-amber-500 mb-6 relative z-10">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                        <div class="text-amber-500 mb-5 md:mb-6 relative z-10">
+                            <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                         </div>
-                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Soft Skills & Personality</h4>
-                        <p class="text-[10px] font-black text-amber-400 uppercase tracking-widest mb-4 relative z-10">NPTEL | IIT Kanpur</p>
-                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Advanced certification focusing on leadership, communication, and industry-standard professionalism.</p>
-                    </div>
-
-                    <!-- Basics of Python -->
-                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
-                        <div class="card-glow bg-blue-500"></div>
-                        <div class="text-blue-500 mb-6 relative z-10">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" /></svg>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Basics of Python</h4>
-                        <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-4 relative z-10">Infosys Springboard</p>
-                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">In-depth training in Python programming, covering algorithmic thinking and data structures.</p>
-                    </div>
-
-                    <!-- Design Thinking -->
-                    <div class="achievement-card p-8 rounded-3xl relative overflow-hidden group h-full flex flex-col">
-                        <div class="card-glow bg-purple-500"></div>
-                        <div class="text-purple-400 mb-6 relative z-10">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" /></svg>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-2 tracking-tight relative z-10">Design Thinking</h4>
-                        <p class="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-4 relative z-10">Infosys Springboard</p>
-                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Applying empathy-based design frameworks to create user-centric digital architectures.</p>
+                        <h4 class="text-lg md:text-xl font-bold text-white mb-2 tracking-tight relative z-10 leading-snug">Soft Skills & Personality</h4>
+                        <p class="text-[9px] font-black text-amber-400 uppercase tracking-widest mb-3 md:mb-4 relative z-10">NPTEL | IIT Kanpur</p>
+                        <p class="text-sm text-slate-400 leading-relaxed font-light italic flex-grow relative z-10">Advanced certification focusing on leadership and professionalism.</p>
+                        <span class="text-[9px] text-slate-600 font-bold mt-4 relative z-10 uppercase">Issued: Oct 2025</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Experience & Education -->
-        <section id="experience" class="py-32 bg-white/[0.01] rounded-[4rem]">
-            <div class="max-w-5xl mx-auto px-8 grid md:grid-cols-2 gap-24">
+        <section id="experience" class="py-20 md:py-32 bg-white/[0.01] rounded-[2rem] md:rounded-[4rem]">
+            <div class="max-w-6xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
                 <!-- Internship -->
                 <div>
-                    <h2 class="text-5xl font-black text-white mb-16 tracking-tighter uppercase italic">Internship_History</h2>
-                    <div class="relative pl-12 border-l border-white/10">
+                    <h2 class="text-4xl md:text-5xl font-black text-white mb-10 md:mb-16 tracking-tighter uppercase italic px-1">Internship_History</h2>
+                    <div class="relative pl-8 md:pl-12 border-l border-white/10">
                         <div class="absolute left-[-5px] top-0 w-[10px] h-[10px] bg-indigo-500 shadow-[0_0_15px_rgba(99,102,241,1)]"></div>
                         <div class="mb-4">
-                            <span class="text-[10px] font-black text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full uppercase tracking-widest">10/2025 — 12/2025</span>
+                            <span class="text-[9px] md:text-[10px] font-black text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-3 py-1 rounded-full uppercase tracking-widest">10/2025 — 12/2025</span>
                         </div>
-                        <h4 class="text-2xl font-bold text-white mb-1 italic">Full Stack Developer Intern</h4>
-                        <p class="text-indigo-400 text-sm font-black uppercase tracking-widest mb-6">Learn Nex (Remote)</p>
-                        <ul class="text-sm text-slate-400 space-y-4 font-light">
-                            <li class="flex gap-3 items-start"><span class="text-indigo-500 mt-1">▹</span> Engineering responsive web applications using modern HTML5, CSS3, and JavaScript paradigms.</li>
-                            <li class="flex gap-3 items-start"><span class="text-indigo-500 mt-1">▹</span> Recognized for hardworking dedication and diligent delivery of project-based solutions.</li>
+                        <h4 class="text-xl md:text-2xl font-bold text-white mb-1 italic">Full Stack Developer Intern</h4>
+                        <p class="text-indigo-400 text-xs md:text-sm font-black uppercase tracking-widest mb-4 md:mb-6">Learn Nex (Remote)</p>
+                        <ul class="text-sm text-slate-400 space-y-3 md:space-y-4 font-light">
+                            <li class="flex gap-3 items-start"><span class="text-indigo-500 mt-1">▹</span> Engineering responsive web applications using modern HTML5, CSS3, and JavaScript.</li>
+                            <li class="flex gap-3 items-start"><span class="text-indigo-500 mt-1">▹</span> Recognized for diligent delivery of project-based solutions.</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Education -->
                 <div>
-                    <h2 class="text-5xl font-black text-white mb-16 tracking-tighter uppercase italic">Academic_Track</h2>
-                    <div class="space-y-12">
+                    <h2 class="text-4xl md:text-5xl font-black text-white mb-10 md:mb-16 tracking-tighter uppercase italic px-1">Academic_Track</h2>
+                    <div class="space-y-10 md:space-y-12">
                         <!-- B.Tech -->
-                        <div class="relative pl-12 border-l border-white/10">
+                        <div class="relative pl-8 md:pl-12 border-l border-white/10">
                             <div class="absolute left-[-5px] top-0 w-[10px] h-[10px] bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
-                            <span class="text-[10px] font-black text-purple-400 bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full uppercase tracking-tighter">01/2023 — 01/2027</span>
-                            <h4 class="text-2xl font-bold text-white mt-4 italic">B.Tech in Computer Science</h4>
-                            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">ABES Engineering College</p>
+                            <span class="text-[9px] md:text-[10px] font-black text-purple-400 bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full uppercase tracking-tighter">01/2023 — 01/2027</span>
+                            <h4 class="text-xl md:text-2xl font-bold text-white mt-4 italic">B.Tech in Computer Science</h4>
+                            <p class="text-slate-500 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1">ABES Engineering College</p>
                         </div>
                         <!-- Intermediate -->
-                        <div class="relative pl-12 border-l border-white/10">
+                        <div class="relative pl-8 md:pl-12 border-l border-white/10">
                             <div class="absolute left-[-5px] top-0 w-[10px] h-[10px] bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.5)]"></div>
-                            <span class="text-[10px] font-black text-teal-400 bg-teal-500/10 border border-teal-500/20 px-3 py-1 rounded-full uppercase tracking-tighter">01/2022 — 01/2023</span>
-                            <h4 class="text-2xl font-bold text-white mt-4 italic tracking-tight">Intermediate (Science)</h4>
-                            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">ST.MARY'S CONVENT SE.SEC.SCHOOL</p>
-                        </div>
-                        <!-- High School -->
-                        <div class="relative pl-12 border-l border-white/10">
-                            <div class="absolute left-[-5px] top-0 w-[10px] h-[10px] bg-slate-500"></div>
-                            <span class="text-[10px] font-black text-slate-400 bg-white/5 border border-white/10 px-3 py-1 rounded-full uppercase tracking-tighter">01/2020 — 01/2021</span>
-                            <h4 class="text-2xl font-bold text-white mt-4 italic tracking-tight">High School</h4>
-                            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">ST.MARY'S CONVENT SE.SEC.SCHOOL</p>
+                            <span class="text-[9px] md:text-[10px] font-black text-teal-400 bg-teal-500/10 border border-teal-500/20 px-3 py-1 rounded-full uppercase tracking-tighter">01/2022 — 01/2023</span>
+                            <h4 class="text-xl md:text-2xl font-bold text-white mt-4 italic tracking-tight">Intermediate (Science)</h4>
+                            <p class="text-slate-500 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-1">ST.MARY'S CONVENT SCHOOL</p>
                         </div>
                     </div>
                 </div>
@@ -413,28 +390,28 @@
         </section>
 
         <!-- Footer -->
-        <footer class="py-40 text-center relative">
-            <h2 class="text-7xl md:text-9xl font-black text-white mb-12 tracking-tighter italic uppercase">Initiate <br/>The_Signal.</h2>
-            <a href="mailto:gunshikaagarwaldpr@gmail.com" class="inline-flex items-center gap-4 px-12 py-6 rounded-full bg-indigo-600 text-white font-black text-sm tracking-[0.3em] transition-all hover:bg-white hover:text-black shadow-2xl shadow-indigo-500/30 uppercase">Enquire_Now <span>→</span></a>
+        <footer class="py-24 md:py-40 text-center relative px-4">
+            <h2 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white mb-10 md:mb-12 tracking-tighter italic uppercase break-words leading-[0.85]">Initiate <br/>The_Signal.</h2>
+            <a href="mailto:gunshikaagarwaldpr@gmail.com" class="inline-flex items-center gap-3 md:gap-4 px-8 md:px-12 py-4 md:py-6 rounded-full bg-indigo-600 text-white font-black text-xs md:text-sm tracking-[0.2em] md:tracking-[0.3em] transition-all hover:bg-white hover:text-black shadow-2xl shadow-indigo-500/30 uppercase">Enquire_Now <span>→</span></a>
             
-            <div class="mt-40 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-20 max-w-7xl mx-auto text-left">
+            <div class="mt-24 md:mt-40 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-12 md:pt-20 max-w-7xl mx-auto text-left">
                 <div>
-                    <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-4">Location</span>
+                    <span class="text-[9px] md:text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-3 md:mb-4">Location</span>
                     <p class="text-sm text-slate-400">Delhi, India</p>
                 </div>
                 <div>
-                    <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-4">Channel</span>
-                    <p class="text-sm text-slate-400 break-all">gunshikaagarwaldpr@gmail.com</p>
+                    <span class="text-[9px] md:text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-3 md:mb-4">Channel</span>
+                    <p class="text-xs md:text-sm text-slate-400 break-all">gunshikaagarwaldpr@gmail.com</p>
                 </div>
                 <div>
-                    <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-4">Network</span>
+                    <span class="text-[9px] md:text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-3 md:mb-4">Network</span>
                     <div class="flex gap-4">
-                        <a href="https://linkedin.com/in/gunshika-agarwal-091124296" target="_blank" class="text-slate-400 hover:text-white">LinkedIn</a>
-                        <a href="https://github.com/gunshika-agarwal" target="_blank" class="text-slate-400 hover:text-white">GitHub</a>
+                        <a href="https://linkedin.com/in/gunshika-agarwal-091124296" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors">LinkedIn</a>
+                        <a href="https://github.com/gunshika-agarwal" target="_blank" class="text-sm text-slate-400 hover:text-white transition-colors">GitHub</a>
                     </div>
                 </div>
                 <div>
-                    <span class="text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-4">© 2026</span>
+                    <span class="text-[9px] md:text-[10px] font-black text-slate-600 uppercase tracking-widest block mb-3 md:mb-4">© 2026</span>
                     <p class="text-sm text-slate-400 font-bold tracking-tighter uppercase leading-none">GA_V3.ENGINE</p>
                 </div>
             </div>
@@ -445,15 +422,19 @@
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                navbar.classList.add('bg-[#02040a]/80', 'backdrop-blur-xl', 'py-4', 'border-b', 'border-white/5');
-                navbar.classList.remove('py-8');
+                navbar.classList.add('bg-[#02040a]/80', 'backdrop-blur-xl', 'py-3', 'md:py-4', 'border-b', 'border-white/5');
+                navbar.classList.remove('py-6', 'md:py-8');
             } else {
-                navbar.classList.remove('bg-[#02040a]/80', 'backdrop-blur-xl', 'py-4', 'border-b', 'border-white/5');
-                navbar.classList.add('py-8');
+                navbar.classList.remove('bg-[#02040a]/80', 'backdrop-blur-xl', 'py-3', 'md:py-4', 'border-b', 'border-white/5');
+                navbar.classList.add('py-6', 'md:py-8');
             }
         });
 
-        const observerOptions = { threshold: 0.1 };
+        const observerOptions = { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px' 
+        };
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -463,7 +444,12 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('section > div, .project-card, .achievement-card').forEach(el => observer.observe(el));
+        document.querySelectorAll('section > div, .project-card, .achievement-card').forEach(el => {
+            if (!el.classList.contains('fade-in-up')) {
+                el.style.opacity = '0';
+                observer.observe(el);
+            }
+        });
     </script>
 </body>
 </html>
